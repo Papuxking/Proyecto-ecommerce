@@ -1,5 +1,6 @@
+import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterPage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/src/presentation/pages/auth/login/LoginPage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/auth/login/LoginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
       initialRoute: 'login',
       routes: {
         'login': (BuildContext context) => LoginPage(),
+        'register': (BuildContext context) => RegisterPage(),
       },
     );
   }
