@@ -20,10 +20,12 @@ class AuthResponse {
         required this.token,
     });
 
-    factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
-        user: User.fromJson(json["user"]),
-        token: json["token"],
-    );
+  
+  factory AuthResponse.fromJson(Map<String, dynamic> json)=> AuthResponse(
+    user: User.fromJson(json["user"]),
+    token: json["token"],
+  );
+
 
     Map<String, dynamic> toJson() => {
         "user": user.toJson(),

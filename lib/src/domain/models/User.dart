@@ -2,41 +2,38 @@
 import 'package:ecommerce_flutter/src/domain/models/Role.dart';
 
 class User {
-    int id;
+    int? id;
     String name;
     String lastname;
     String email;
-    String phone;
-    dynamic image;
-    String notificationToken;
-    DateTime createdAt;
-    DateTime updatedAt;
-    List<Role> roles;
+    String phone;  
+    String? image;
+    String? password;
+    String? notificationToken;  
+    List<Role>? roles;
 
     User({
-        required this.id,
+        this.id,
         required this.name,
         required this.lastname,
         required this.email,
         required this.phone,
-        required this.image,
-        required this.notificationToken,
-        required this.createdAt,
-        required this.updatedAt,
-        required this.roles,
+        this.password,
+        this.image,
+        this.notificationToken = 'default_token', // Asignar token predeterminado,
+        this.roles,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
+        id: json["id"]?? 0,
         name: json["name"],
         lastname: json["lastname"],
         email: json["email"],
         phone: json["phone"],
-        image: json["image"],
-        notificationToken: json["notification_token"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        roles: List<Role>.from(json["roles"].map((x) => Role.fromJson(x))),
+        password: json["password"]?? '',
+        image: json["image"] ?? '',
+        notificationToken: json["notification_token"]?? 'default_token',
+        roles: json["roles"] != null ? List<Role>.from(json["roles"].map((x) => Role.fromJson(x))):[],
     );
 
 
@@ -47,9 +44,8 @@ class User {
         "email": email,
         "phone": phone,
         "image": image,
-        "notification_token": notificationToken,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-        "roles": List<dynamic>.from(roles.map((x) => x.toJson())),
+        "password": password,
+        "notification_token": notificationToken ?? 'default_token',
+        "roles": roles != null ? List<dynamic>.from(roles!.map((x) => x.toJson())): [],
     };
 }

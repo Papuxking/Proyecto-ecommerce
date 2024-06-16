@@ -1,4 +1,6 @@
+// src/presentation/widgets/defaultTextField.dart
 import 'package:flutter/material.dart';
+
 
 class DefaultTextField extends StatelessWidget {
   String label;
@@ -7,16 +9,18 @@ class DefaultTextField extends StatelessWidget {
   Function(String text) onChange;
   bool obscureText;
 
-  DefaultTextField(
-      {required this.label,
+  DefaultTextField({
+      Key? key,
+      required this.label,
       required this.icon,
       required this.onChange,
       this.errorText,
-      this.obscureText = false});
+      this.obscureText = false
+      }): super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       obscureText: obscureText,
       onChanged: (text) {
         onChange(text);

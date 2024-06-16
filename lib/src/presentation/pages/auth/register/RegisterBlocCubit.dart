@@ -1,9 +1,15 @@
+// src/presentation/pages/auth/register/RegisterBlocCubit.dart
+import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
+import 'package:ecommerce_flutter/src/domain/models/User.dart';
+import 'package:ecommerce_flutter/src/domain/useCase/auth/AuthUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterBlocState.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class RegisterBlocCubit extends Cubit<RegisterBlocState> {
-  RegisterBlocCubit() : super(RegisterInitial());
+  AuthUseCases authUseCases;
+  RegisterBlocCubit(this.authUseCases) : super(RegisterInitial());
 
   final _nameController = BehaviorSubject<String>();
   final _lastnameController = BehaviorSubject<String>();
@@ -11,6 +17,7 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState> {
   final _phoneController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
   final _confirmPasswordController = BehaviorSubject<String>();
+  final _responseController =BehaviorSubject<Resource>();
 
   Stream<String> get nameSream => _nameController.stream;
   Stream<String> get lasnameStream => _lastnameController.stream;
@@ -18,6 +25,8 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState> {
   Stream<String> get phoneStream => _phoneController.stream;
   Stream<String> get passwordStream => _passwordController.stream;
   Stream<String> get confirmPasswordStream => _confirmPasswordController.stream;
+  Stream<Resource> get responseStream => _responseController.stream;
+
 
   Stream<bool> get validateForm => Rx.combineLatest6(
       nameSream,
@@ -28,13 +37,24 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState> {
       confirmPasswordStream, (a, b, c, d, e, f) => true
       );
 
-  void register() {
-    print('Name: ${_nameController.value}');
-    print('Lastname: ${_lastnameController.value}');
-    print('Email: ${_emailController.value}');
-    print('Phone: ${_phoneController.value}');
-    print('Password: ${_passwordController.value}');
-    print('Confirm Password: ${_confirmPasswordController.value}');
+  toUser() => User(
+ 
+  name: _nameController.value, 
+  lastname: _lastnameController.value, 
+  email: _emailController.value, 
+  phone: _phoneController.value, 
+  password: _passwordController.value,
+  notificationToken: 'default_token'
+
+  );
+
+  void register() async{
+   _responseController.add(Loading());
+    Resource<AuthResponse> response = await authUseCases.register.run(toUser());
+    _responseController.add(response);
+     Future.delayed(Duration(seconds: 1),(){
+      _responseController.add(Initial());
+    });
   }
 
   void changeName(String name) {
