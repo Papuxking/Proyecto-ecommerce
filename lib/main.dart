@@ -2,6 +2,7 @@
 import 'package:ecommerce_flutter/injection.dart';
 import 'package:ecommerce_flutter/src/presentation/blocProviders.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterPage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/roles/RolesPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/login/LoginPage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,7 +33,9 @@ const MyApp({super.key});
         initialRoute: 'login',
         routes: {
           'login': (BuildContext context) => LoginPage(),
-          'register': (BuildContext context) => RegisterPage()
+          'register': (BuildContext context) => RegisterPage(),
+          'roles': (BuildContext context) => RolesPage()
+
         },
       ),
     );
