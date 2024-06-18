@@ -14,11 +14,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: BlocBuilder<AdminHomeBloc, AdminHomeState>(
-      builder: (context, state){
-        
-      }
-    )
+        body: BlocBuilder<AdminHomeBloc, AdminHomeState>(builder: (context, state){
+          
+        })
     );
   }
 }
