@@ -15,7 +15,7 @@ import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthServic
 import 'package:ecommerce_flutter/src/di/AppModule.dart' as _i7;
 import 'package:ecommerce_flutter/src/domain/repository/AuthRepository.dart'
     as _i5;
-import 'package:ecommerce_flutter/src/domain/useCase/auth/AuthUseCases.dart'
+import 'package:ecommerce_flutter/src/domain/useCases/auth/AuthUseCases.dart'
     as _i6;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;

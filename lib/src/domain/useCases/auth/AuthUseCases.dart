@@ -1,10 +1,10 @@
 // src/domain/useCase/auth/AuthUseCases.dart
 
 
-import 'package:ecommerce_flutter/src/domain/useCase/auth/GetUserSessionUseCase.dart';
-import 'package:ecommerce_flutter/src/domain/useCase/auth/LoginUseCase.dart';
-import 'package:ecommerce_flutter/src/domain/useCase/auth/RegisterUseCase.dart';
-import 'package:ecommerce_flutter/src/domain/useCase/auth/SaveUserSessionUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/auth/GetUserSessionUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/auth/LoginUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/auth/RegisterUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
 
 
 class AuthUseCases{

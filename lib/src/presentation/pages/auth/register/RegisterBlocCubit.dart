@@ -1,7 +1,7 @@
 // src/presentation/pages/auth/register/RegisterBlocCubit.dart
 import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
 import 'package:ecommerce_flutter/src/domain/models/User.dart';
-import 'package:ecommerce_flutter/src/domain/useCase/auth/AuthUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterBlocState.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
