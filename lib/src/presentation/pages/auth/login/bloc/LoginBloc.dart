@@ -1,5 +1,6 @@
 // src/presentation/pages/auth/login/bloc/LoginBloc.dart
 
+import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
 import 'package:ecommerce_flutter/src/domain/useCase/auth/AuthUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
@@ -50,13 +51,19 @@ emit (
 
 }
 Future<void> _onLoginSubmit(LoginSubmit event,Emitter<LoginState>emit) async{
- _responseController.add(Loading());
-    Resource response= await authUseCases.login.run(state.email.value, state.password.value);
-    _responseController.add(response);
-    Future.delayed(Duration(seconds: 1),(){
-      _responseController.add(Initial());
-    });
-}
+ emit( 
+    state.copyWith(
+      response: Loading(),
+      formKey: formKey
+    ),
+  );
+  Resource<AuthResponse> response= await authUseCases.login.run(state.email.value, state.password.value);
+  emit (state.copyWith(
+      response: response,
+      formKey: formKey
+      )
+    );
+  }
 
 
   final _responseController= BehaviorSubject<Resource>();

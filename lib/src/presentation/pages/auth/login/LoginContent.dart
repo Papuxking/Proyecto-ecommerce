@@ -10,14 +10,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class LoginContent extends StatelessWidget{
   
   LoginBloc? bloc;
+  LoginState state;
 
-  LoginContent(this.bloc) ;
+  LoginContent(this.bloc,this.state) ;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc,LoginState>(
-        builder: (context,state) {
-          return Form(
+    return Form(
           key: state.formKey,
           child: Stack(
           alignment: Alignment.center,
@@ -142,11 +141,10 @@ class LoginContent extends StatelessWidget{
                         ],
                       ),
                     ),
-                ],
+                  ],
                 
-                            ),
+                ),
               );
-          }
-        );
+    
     }
 }
