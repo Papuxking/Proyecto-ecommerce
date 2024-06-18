@@ -54,6 +54,9 @@ class _LoginPageState extends State<LoginPage> {
                   msg: 'Login Exitoso',
                   toastLength: Toast.LENGTH_LONG
                   );
+                  WidgetsBinding.instance.addPostFrameCallback((timeStamp){
+                    Navigator.pushNamed(context, 'roles');
+                  });
             }
           },
           child: BlocBuilder<LoginBloc, LoginState>(

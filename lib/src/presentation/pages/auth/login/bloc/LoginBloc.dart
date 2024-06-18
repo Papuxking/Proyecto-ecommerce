@@ -36,7 +36,15 @@ class LoginBloc extends Bloc<LoginEvent,LoginState> {
 
 Future<void> _onInitialEvent(InitialEvent event,Emitter<LoginState> emit) async{
   AuthResponse? authResponse = await authUseCases.getUserSession.run();
-  emit(state.copyWith(formKey: formKey));
+    emit( state.copyWith( formKey: formKey ) );
+    if (authResponse != null) {
+      emit(
+        state.copyWith(
+          response: Success(authResponse), // AuthResponse -> user, token
+          formKey: formKey
+        )
+      );
+    }
 }
 Future<void> _onEmailChange(EmailChange event,Emitter<LoginState>emit) async{
   emit (
