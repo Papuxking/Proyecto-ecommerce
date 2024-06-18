@@ -54,6 +54,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 _bloc?.add(AdminChangeDrawerPage(pageIndex: 1)); //posicion 0
                 Navigator.pop(context);
               },
+            ),
+            ListTile(
+              title: Text('Cerrar sesión'),
+              onTap: () {
+                _bloc?.add(AdminLogout()); //posicion 0
+                Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+              },
             )
           ],
         ),

@@ -9,9 +9,12 @@ class AdminHomeBloc extends Bloc<AdminHomeEvent, AdminHomeState> {
 
   AdminHomeBloc(this.authUseCases): super(AdminHomeState()) {
     on<AdminChangeDrawerPage>(_onAdminChangeDrawerPage);
+    on<AdminLogout>(_onAdminLogout);
   }
 
- 
+  Future<void> _onAdminLogout(AdminLogout event, Emitter<AdminHomeState> emit) async {
+    await authUseCases.logout.run();
+  }
 
   Future<void> _onAdminChangeDrawerPage(AdminChangeDrawerPage event, Emitter<AdminHomeState> emit) async {
     emit(
