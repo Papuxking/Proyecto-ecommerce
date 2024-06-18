@@ -1,5 +1,6 @@
 // src/di/AppModule.dart
-import 'package:ecommerce_flutter/src/data/dataSource/remote/repository/AuthRepositoryImpl.dart';
+import 'package:ecommerce_flutter/src/data/dataSource/local/SharedPref.dart';
+import 'package:ecommerce_flutter/src/data/repository/AuthRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:ecommerce_flutter/src/domain/repository/AuthRepository.dart';
 import 'package:ecommerce_flutter/src/domain/useCase/auth/AuthUseCases.dart';
@@ -14,7 +15,10 @@ abstract class AppModule{
   AuthService get authService => AuthService();
 
   @injectable
-  AuthRepository get authRepository => AuthRepositoryImpl(authService);
+  SharedPref get sharedPref => SharedPref();
+
+  @injectable
+  AuthRepository get authRepository => AuthRepositoryImpl(authService, sharedPref);
 
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(

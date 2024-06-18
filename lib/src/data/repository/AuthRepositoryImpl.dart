@@ -1,5 +1,6 @@
 // src/data/dataSource/remote/repository/AuthRepositoryImpl.dart
 
+import 'package:ecommerce_flutter/src/data/dataSource/local/SharedPref.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
 import 'package:ecommerce_flutter/src/domain/models/User.dart';
@@ -11,7 +12,10 @@ import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 class AuthRepositoryImpl implements AuthRepository{
   
   AuthService authService;
-  AuthRepositoryImpl (this.authService);
+  SharedPref sharedPref;
+
+    AuthRepositoryImpl(this.authService, this.sharedPref);
+
 
   @override
   Future<Resource<AuthResponse>> login(String email, String password) {
@@ -22,6 +26,21 @@ class AuthRepositoryImpl implements AuthRepository{
   @override
   Future<Resource<AuthResponse>> register(User user) {
     return authService.register(user);
+  }
+  
+  @override
+  Future<AuthResponse?> getUserSession() async {
+    final data = await sharedPref.read('user');
+    if (data != null) {
+      AuthResponse authResponse = AuthResponse.fromJson(data);
+      return authResponse;
+    }
+    return null;
+  }
+  
+ @override
+  Future<void> saveUserSession(AuthResponse authResponse) async {
+    sharedPref.save('user', authResponse.toJson());
   }
 
 } 
