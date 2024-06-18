@@ -13,7 +13,8 @@ class _ClientHomePageState extends State<ClientHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('ClientHomePage'),
+      body: Center(
+        child: Text('ClientHomePage'),
       )
     );
   }
