@@ -21,14 +21,7 @@ class LoginContent extends StatelessWidget{
           child: Stack(
           alignment: Alignment.center,
           children: [
-                  Image.asset(
-                      'assets/img/fondo.jpg',
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      fit: BoxFit.cover,
-                      color: Colors.black54,
-                      colorBlendMode: BlendMode.darken,
-                    ),
+                  _imageBackground(context),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.85,
                       height: MediaQuery.of(context).size.height * 0.75,
@@ -39,43 +32,89 @@ class LoginContent extends StatelessWidget{
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.person,
+                          _iconPerson(),
+                _textLogin(),
+                _textFieldEmail(), 
+                _textFieldPassword(),
+                _buttonLogin(context),
+                _textDontHaveAccount(),
+                _buttonGoToRegister(context),
+
+                        ],
+                      ),
+                    ),
+                  ],
+                
+                ),
+              );
+    
+    }
+
+    Widget _iconPerson() {
+    return Icon(
+      Icons.person,
                             color: Colors.white,
                             size: 125,
-                          ),
-                          Text(
-                            'LOGIN',
+    );
+  }
+
+  Widget _textLogin() {
+    return Text(
+      'LOGIN',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 25, right: 25),
-                            child: DefaultTextField(
-                              label: 'Correo electrónico',
-                              icon: Icons.email,
-                              //errorText: snapshot.error?.toString(),
-                              onChange: (text) {
-                                bloc?.add(EmailChange(email: BlocForItem(value: text)));
+    );
+  }
+
+  Widget _buttonGoToRegister(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+                            height: 55,
+                            margin:
+                                EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, 'register');
                               },
-                            )
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 25, right: 25),
-                            child: DefaultTextField(
-                              label: 'Contraseña',
-                              icon: Icons.lock,
-                              //errorText: snapshot.error?.toString(),
-                              onChange: (text) {
-                                bloc?.add(PasswordChange(password: BlocForItem(value: text)));
-                              },
-                              obscureText: true,
-                            )
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
+                              style:
+                                  ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                              child: Text(
+                                'REGISTRATE',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+    );
+  }
+
+  Widget _textDontHaveAccount() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 65,
+                                height: 1,
+                                color: Colors.white,
+                                margin: EdgeInsets.only(right: 5),
+                              ),
+                              Text(
+                                'No tienes cuenta?',
+                                style: TextStyle(color: Colors.white, fontSize: 17),
+                              ),
+                              Container(
+                                width: 65,
+                                height: 1,
+                                color: Colors.white,
+                                margin: EdgeInsets.only(left: 5),
+                              ),
+                            ],
+    );
+  }
+
+  Widget _buttonLogin(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
                             height: 55,
                             margin:
                                 EdgeInsets.only(
@@ -99,52 +138,46 @@ class LoginContent extends StatelessWidget{
                                       style: TextStyle(color: Colors.black),
                                     ),
                                   ) 
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                width: 65,
-                                height: 1,
-                                color: Colors.white,
-                                margin: EdgeInsets.only(right: 5),
-                              ),
-                              Text(
-                                'No tienes cuenta?',
-                                style: TextStyle(color: Colors.white, fontSize: 17),
-                              ),
-                              Container(
-                                width: 65,
-                                height: 1,
-                                color: Colors.white,
-                                margin: EdgeInsets.only(left: 5),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 55,
-                            margin:
-                                EdgeInsets.only(left: 25, right: 25, top: 15, bottom: 15),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, 'register');
+    );
+  }
+
+  Widget _textFieldPassword() {
+    return Container(
+      margin: EdgeInsets.only(left: 25, right: 25),
+                            child: DefaultTextField(
+                              label: 'Contraseña',
+                              icon: Icons.lock,
+                              //errorText: snapshot.error?.toString(),
+                              onChange: (text) {
+                                bloc?.add(PasswordChange(password: BlocForItem(value: text)));
                               },
-                              style:
-                                  ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                              child: Text(
-                                'REGISTRATE',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                
-                ),
-              );
-    
-    }
+                              obscureText: true,
+                            )
+    );
+  }
+
+  Widget _textFieldEmail() {
+    return Container(
+      margin: EdgeInsets.only(left: 25, right: 25),
+                            child: DefaultTextField(
+                              label: 'Correo electrónico',
+                              icon: Icons.email,
+                              //errorText: snapshot.error?.toString(),
+                              onChange: (text) {
+                                bloc?.add(EmailChange(email: BlocForItem(value: text)));
+                              },
+                            )
+    );
+  } 
+
+  Widget _imageBackground(BuildContext context) {
+    return Image.asset(
+      'assets/img/fondo.jpg',
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      fit: BoxFit.cover,
+                      color: Colors.black54,
+                      colorBlendMode: BlendMode.darken,
+    );
+  }
 }
