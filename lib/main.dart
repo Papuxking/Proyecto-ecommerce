@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   runApp(const MyApp());
 }
