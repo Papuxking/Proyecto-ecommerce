@@ -6,6 +6,7 @@ import 'package:ecommerce_flutter/src/data/dataSource/remote/services/UsersServi
 import 'package:ecommerce_flutter/src/data/repository/AuthRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:ecommerce_flutter/src/data/repository/CategoriesRepositoryImpl.dart';
+import 'package:ecommerce_flutter/src/data/repository/ProductsRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/UsersRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
 import 'package:ecommerce_flutter/src/domain/repository/AuthRepository.dart';
@@ -24,6 +25,8 @@ import 'package:ecommerce_flutter/src/domain/useCases/categories/DeleteCategoryU
 import 'package:ecommerce_flutter/src/domain/useCases/categories/GetCategoriesUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/categories/UpdateCategoryUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/CreateProductUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/products/GetProductsByCategoryUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/products/ProductsUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/users/UpdateUserUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:injectable/injectable.dart';

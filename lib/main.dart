@@ -4,6 +4,8 @@ import 'package:ecommerce_flutter/src/presentation/blocProviders.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/AdminCategoryCreatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/update/AdminCategoryUpdatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/AdminHomePage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/product/create/AdminProductCreatePage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/product/list/AdminProductListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/profile/info/ProfileInfoPage.dart';
