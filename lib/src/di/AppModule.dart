@@ -16,6 +16,11 @@ import 'package:ecommerce_flutter/src/domain/useCases/auth/LoginUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/LogoutUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/RegisterUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/SaveUserSessionUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/categories/CategoriesUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/categories/CreateCategoryUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/categories/DeleteCategoryUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/categories/GetCategoriesUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/categories/UpdateCategoryUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/users/UpdateUserUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:injectable/injectable.dart';
@@ -68,6 +73,14 @@ abstract class AppModule{
   @injectable
   UsersUseCases get usersUseCases => UsersUseCases(
     updateUser: UpdateUserUseCase(usersRepository)
+  );
+
+  @injectable
+  CategoriesUseCases get categoriesUseCases => CategoriesUseCases(
+    create: CreateCategoryUseCase(categoriesRepository),
+    getCategories: GetCategoriesUseCase(categoriesRepository),
+    update: UpdateCategoryUseCase(categoriesRepository),
+    delete: DeleteCategoryUseCase(categoriesRepository)
   );
 
 }
