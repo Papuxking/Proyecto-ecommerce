@@ -1,7 +1,9 @@
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/bloc/AdminCategoryCreateBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/bloc/AdminCategoryCreateEvent.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/bloc/AdminCategoryCreateState.dart';
 import 'package:ecommerce_flutter/src/presentation/utils/BlocFormItem.dart';
 import 'package:ecommerce_flutter/src/presentation/utils/SelectOptionImageDialog.dart';
+import 'package:ecommerce_flutter/src/presentation/widgets/DefaultIconBack.dart';
 import 'package:ecommerce_flutter/src/presentation/widgets/DefaultTextField.dart';
 import 'package:flutter/material.dart';
 
@@ -12,11 +14,30 @@ class AdminCategoryCreateContent extends StatelessWidget {
 
   AdminCategoryCreateContent(this.bloc, this.state);
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Form(
+      key: state.formKey,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          _imageBackground(context),
+          SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _imageCategory(context),
+                  _cardCategoryForm(context)
+                ],
+              ),
+            ),
+          ),
+          DefaultIconBack(left: 15, top: 50)
+        ],
+      )
+    );
   }
 
   Widget _cardCategoryForm(BuildContext context) {
@@ -35,13 +56,33 @@ class AdminCategoryCreateContent extends StatelessWidget {
         child: Column(
           children: [
             _textNewCategory(),
+            _textFieldName(),
+            _textFieldDescription(),
+            _fabSubmit()
           ],
         ),
       ),
     );
   } 
 
-  
+  Widget _fabSubmit() {
+    return Container(
+      alignment: Alignment.centerRight,
+      margin: EdgeInsets.only(top: 30),
+      child: FloatingActionButton(
+        onPressed: () {
+          if (state.formKey!.currentState!.validate()) {
+            bloc?.add(FormSubmit());
+          }
+        },
+        backgroundColor: Colors.black,
+        child: Icon(
+          Icons.check,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
 
   Widget _textNewCategory() {
     return Container(
@@ -56,6 +97,63 @@ class AdminCategoryCreateContent extends StatelessWidget {
     );
   }
 
+  Widget _textFieldName() {
+    return DefaultTextField(
+      label: 'Nombre de la categoria', 
+      icon: Icons.category, 
+      onChanged: (text) {
+        bloc?.add(NameChanged(name: BlocFormItem(value: text)));
+      },
+      validator: (value) {
+        return state.name.error;
+      },
+      color: Colors.black,
+    );
+  }
+
+  Widget _textFieldDescription() {
+    return DefaultTextField(
+      label: 'Descripcion', 
+      icon: Icons.list, 
+      onChanged: (text) {
+        bloc?.add(DescriptionChanged(description: BlocFormItem(value: text)));
+      },
+      validator: (value) {
+        return state.description.error;
+      },
+      color: Colors.black,
+    );
+  }
+
+  Widget _imageCategory(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        SelectOptionImageDialog(
+          context, 
+          () { bloc?.add(PickImage()); }, 
+          () { bloc?.add(TakePhoto()); }, 
+        );
+      },
+      child: Container(
+        width: 150,
+        margin: EdgeInsets.only(top: 100),
+        child: AspectRatio(
+          aspectRatio: 1/1,
+          child: ClipOval(
+            child: state.file != null 
+            ? Image.file(
+              state.file!,
+              fit: BoxFit.cover,
+            )
+            : Image.asset(
+              'assets/img/no-image.png',
+              fit: BoxFit.cover,
+              ) 
+          ),
+        ),
+      ),
+    );
+  }
 
   Widget _imageBackground(BuildContext context) {
     return Image.asset(
@@ -67,5 +165,4 @@ class AdminCategoryCreateContent extends StatelessWidget {
       colorBlendMode: BlendMode.darken,
     );
   }
-
 }

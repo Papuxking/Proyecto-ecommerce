@@ -1,15 +1,48 @@
-import 'package:flutter/material.dart';
+import 'package:ecommerce_flutter/src/presentation/utils/BlocFormItem.dart';
+import 'package:equatable/equatable.dart';
 
-class AdminCategoryCreateEvent extends StatefulWidget {
-  const AdminCategoryCreateEvent({super.key});
-
+abstract class AdminCategoryCreateEvent extends Equatable {
+  const AdminCategoryCreateEvent();
   @override
-  State<AdminCategoryCreateEvent> createState() => _AdminCategoryCreateEventState();
+  List<Object?> get props => [];
 }
 
-class _AdminCategoryCreateEventState extends State<AdminCategoryCreateEvent> {
+class AdminCategoryCreateInitEvent extends AdminCategoryCreateEvent {
+  const AdminCategoryCreateInitEvent();
   @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
+  List<Object?> get props => [];
+}
+
+class NameChanged extends AdminCategoryCreateEvent {
+  final BlocFormItem name;
+  const NameChanged({ required this.name });
+  @override
+  List<Object?> get props => [name];
+}
+
+class DescriptionChanged extends AdminCategoryCreateEvent {
+  final BlocFormItem description;
+  const DescriptionChanged({ required this.description });
+  @override
+  List<Object?> get props => [description];
+}
+
+class FormSubmit extends AdminCategoryCreateEvent {
+  const FormSubmit();
+  @override
+  List<Object?> get props => [];
+}
+
+class ResetForm extends AdminCategoryCreateEvent {
+  const ResetForm();
+  @override
+  List<Object?> get props => [];
+}
+
+class PickImage extends AdminCategoryCreateEvent {
+  const PickImage();
+}
+
+class TakePhoto extends AdminCategoryCreateEvent {
+  const TakePhoto();
 }
