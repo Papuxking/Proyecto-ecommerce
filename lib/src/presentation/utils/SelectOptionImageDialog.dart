@@ -4,7 +4,7 @@ SelectOptionImageDialog(BuildContext context, Function() pickImage, Function() t
   return showDialog(
     context: context, 
     builder: (BuildContext context) => AlertDialog(
-      title: Text('Selecciona una opcion'),
+      title: Text('Selecciona una opción'),
       actions: [
         ElevatedButton(
           onPressed: () {
@@ -12,7 +12,7 @@ SelectOptionImageDialog(BuildContext context, Function() pickImage, Function() t
             pickImage();
           }, 
           child: Text(
-            'Galeria',
+            'Galería',
             style: TextStyle(
               color: Colors.black
             ),
@@ -24,7 +24,7 @@ SelectOptionImageDialog(BuildContext context, Function() pickImage, Function() t
             takePhoto();
           }, 
           child: Text(
-            'Camara',
+            'Cámara',
             style: TextStyle(
               color: Colors.black
             ),

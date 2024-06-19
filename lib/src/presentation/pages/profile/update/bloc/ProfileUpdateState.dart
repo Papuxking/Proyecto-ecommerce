@@ -30,7 +30,7 @@ class ProfileUpdateState extends Equatable {
     id: id,
     name: name.value, 
     lastname: lastname.value, 
-    phone: phone.value
+    phone: phone.value, email: ''
   );
 
   ProfileUpdateState copyWith({

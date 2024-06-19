@@ -11,7 +11,7 @@ class AuthService {
   Future<Resource<AuthResponse>> login(String email, String password) async {
     try {
       // http://192.168.80.13:3000/auth/login
-      Uri url = Uri.http(Apiconfig.API_ECOMMERCE, '/auth/login');
+      Uri url = Uri.http(ApiConfig.API_ECOMMERCE, '/auth/login');
       Map<String, String> headers = {"Content-Type": "application/json"};
       String body = json.encode({'email': email, 'password': password});
       final response = await http.post(url, headers: headers, body: body);
@@ -32,7 +32,7 @@ class AuthService {
   Future<Resource<AuthResponse>> register(User user) async {
     try {
       // http://192.168.80.13:3000/auth/register
-      Uri url = Uri.http(Apiconfig.API_ECOMMERCE, '/auth/register');
+      Uri url = Uri.http(ApiConfig.API_ECOMMERCE, '/auth/register');
       Map<String, String> headers = {"Content-Type": "application/json"};
       String body = json.encode(user);
       final response = await http.post(url, headers: headers, body: body);
