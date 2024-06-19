@@ -25,6 +25,7 @@ import 'package:ecommerce_flutter/src/domain/useCases/categories/DeleteCategoryU
 import 'package:ecommerce_flutter/src/domain/useCases/categories/GetCategoriesUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/categories/UpdateCategoryUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/CreateProductUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/products/DeleteProductUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/GetProductsByCategoryUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/ProductsUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/UpdateProductUseCase.dart';
