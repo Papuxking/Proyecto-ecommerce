@@ -42,6 +42,8 @@ const MyApp({super.key});
           'profile/info': (BuildContext context) => ProfileInfoPage(),
           'client/home': (BuildContext context) => ClientHomePage(),
           'admin/home': (BuildContext context) => AdminHomePage(),
+          'admin/category/create': (BuildContext context) => AdminCategoryCreatePage(),
+
 
         },
       ),
