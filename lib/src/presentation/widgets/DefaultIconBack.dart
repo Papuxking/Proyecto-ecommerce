@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Defaulticonback extends StatelessWidget {
+class DefaultIconBack extends StatelessWidget {
+
   double left;
   double top;
+  Color color;
 
-  Defaulticonback({
+  DefaultIconBack({
     required this.left,
     required this.top,
+    this.color = Colors.white
   });
 
   @override
@@ -15,14 +18,13 @@ class Defaulticonback extends StatelessWidget {
       alignment: Alignment.topLeft,
       margin: EdgeInsets.only(left: left, top: top),
       child: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(
-            Icons.arrow_back_ios,
-            size: 35,
-            color: Colors.white,
-          )),
+        onPressed: () { Navigator.pop(context); },               
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 35,
+          color: color,
+        )
+      ),
     );
   }
 }

@@ -1,36 +1,44 @@
 // src/presentation/pages/auth/register/RegisterContent.dart
-import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterBlocCubit.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/auth/register/bloc/RegisterBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/auth/register/bloc/RegisterEvent.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/auth/register/bloc/RegisterState.dart';
+import 'package:ecommerce_flutter/src/presentation/utils/BlocFormItem.dart';
+import 'package:ecommerce_flutter/src/presentation/widgets/DefaultButton.dart';
 import 'package:ecommerce_flutter/src/presentation/widgets/DefaultIconBack.dart';
-import 'package:ecommerce_flutter/src/presentation/widgets/defaultButton.dart';
-import 'package:ecommerce_flutter/src/presentation/widgets/defaultTextField.dart';
+import 'package:ecommerce_flutter/src/presentation/widgets/DefaultTextField.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class RegisterContent extends StatelessWidget{
+class RegisterContent extends StatelessWidget {
 
-RegisterBlocCubit? bloc;
+  RegisterBloc? bloc;
+  RegisterState state;
 
-RegisterContent(this.bloc);
+  RegisterContent(this.bloc, this.state);
 
-@override
-Widget build(BuildContext context){
-  return Stack(
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: state.formKey,
+      child: Stack(
         alignment: Alignment.center,
         children: [
           Image.asset(
-            'assets/img/fondo.jpg',
-            height: MediaQuery.of(context).size.height,
+            'assets/img/background3.jpg',
             width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             fit: BoxFit.cover,
             color: Color.fromRGBO(0, 0, 0, 0.7),
             colorBlendMode: BlendMode.darken,
           ),
+          
           Container(
-            height: MediaQuery.of(context).size.height * 0.85,
-            width: MediaQuery.of(context).size.width * 0.75,
+            width: MediaQuery.of(context).size.width * 0.85,
+            height: MediaQuery.of(context).size.height * 0.75,
             decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 255, 255, 0.3),
-                borderRadius: BorderRadius.all(Radius.circular(25))),
+              color: Color.fromRGBO(255, 255, 255, 0.3),
+              borderRadius: BorderRadius.all(Radius.circular(25))
+            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -42,125 +50,101 @@ Widget build(BuildContext context){
                   Text(
                     'REGISTRO',
                     style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream: bloc?.nameSream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                              label: 'Nombre',
-                              errorText: snapshot.error?.toString(),
-                              icon: Icons.person,
-                              onChange: (text) {
-                                bloc?.changeName(text);
-                              });
-                        }),
+                    child: DefaultTextField(
+                      label: 'Nombre', 
+                      icon: Icons.person, 
+                      onChanged: (text) {
+                        bloc?.add(RegisterNameChanged(name: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream:bloc?.lasnameStream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                              label: 'Apellido',
-                              errorText: snapshot.error?.toString(),
-                              icon: Icons.person,
-                              onChange: (text) {
-                                bloc?.changeLastname(text);
-                              });
-                        }),
+                    child: DefaultTextField(
+                      label: 'Apellido', 
+                      icon: Icons.person_outline, 
+                      onChanged: (text) {
+                        bloc?.add(RegisterLastnameChanged(lastname: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream: bloc?.emailStream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                              label: 'Email',
-                              icon: Icons.email,
-                              errorText: snapshot.error?.toString(),
-                              onChange: (text) {
-                               bloc?.changeEmail(text);
-                              });
-                        }),
+                    child: DefaultTextField(
+                      label: 'Email', 
+                      icon: Icons.email, 
+                      onChanged: (text) {
+                        bloc?.add(RegisterEmailChanged(email: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream:bloc?.phoneStream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                              label: 'Teléfono',
-                              icon: Icons.phone,
-                              errorText: snapshot.error?.toString(),
-                              onChange: (text) {
-                                bloc?.changePhone(text);
-                              });
-                        }),
+                    child: DefaultTextField(
+                      label: 'Telefono',
+                      icon: Icons.phone, 
+                      onChanged: (text) {
+                        bloc?.add(RegisterPhoneChanged(phone: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream: bloc?.passwordStream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                            label: 'Contraseña',
-                            errorText: snapshot.error?.toString(),
-                            icon: Icons.lock,
-                            onChange: (text) {
-                              bloc?.changePassword(text);
-                            },
-                            obscureText: true,
-                          );
-                        }),
+                    child: DefaultTextField(
+                      label: 'Contraseña', 
+                      icon: Icons.lock, 
+                      obscureText: true,
+                      onChanged: (text) {
+                        bloc?.add(RegisterPasswordChanged(password: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25),
-                    child: StreamBuilder(
-                        stream: bloc?.confirmPasswordStream,
-                        builder: (context, snapshot) {
-                          return DefaultTextField(
-                            label: 'Confirmar Contraseña',
-                            errorText: snapshot.error?.toString(),
-                            icon: Icons.lock_outline,
-                            onChange: (text) {
-                              bloc?.changeConfirmPassword(text);
-                            },
-                            obscureText: true,
-                          );
-                        }),
+                    child: DefaultTextField(
+                      label: 'Confirmar Contraseña', 
+                      icon: Icons.lock_outline, 
+                      obscureText: true,
+                      onChanged: (text) {
+                        bloc?.add(RegisterConfirmPasswordChanged(confirmPassword: BlocFormItem(value: text)));
+                      }
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25, right: 25, top: 15),
-                    child: StreamBuilder(
-                        stream: bloc?.validateForm,
-                        builder: (context, snapshot) {
-                          return Defaultbutton(
-                              text: 'REGISTRARSE',
-                              color: snapshot.hasData ? Colors.black : Colors.grey,
-                              onPressed: () {
-                                if (snapshot.hasData) {
-                                 bloc?.register();
-                                } else {
-                                  Fluttertoast.showToast(
-                                      msg: 'El formulario no es válido',
-                                      toastLength: Toast.LENGTH_LONG);
-                                      
-                                }
-                              });
-                        }),
+                    child: DefaultButton(
+                      text: 'REGISTRARSE', 
+                      color:  Colors.black,
+                      onPressed: () {
+                        if (state.formKey!.currentState!.validate()) {
+                          bloc?.add(RegisterFormSubmit());
+                        }
+                        else {
+                          Fluttertoast.showToast(
+                            msg: 'El formulario no es valido',
+                            toastLength: Toast.LENGTH_LONG
+                          );
+                        }
+                      }
+                    ),
                   )
                 ],
               ),
             ),
           ),
-          Defaulticonback(left: 45, top: 135)
+          DefaultIconBack(
+            left: 55,
+            top: 140,
+          )
         ],
-      );
+      ),
+    );
+  }
 }
-}
-
