@@ -96,7 +96,7 @@ class ProfileInfoContent extends StatelessWidget {
 
   Widget _imageBackground(BuildContext context) {
     return Image.asset(
-      'assets/img/background1.jpg',
+      'assets/img/background4.jpg',
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       fit: BoxFit.cover,
