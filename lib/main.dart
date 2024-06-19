@@ -47,6 +47,8 @@ const MyApp({super.key});
           'admin/category/create': (BuildContext context) => AdminCategoryCreatePage(),
           'admin/category/update': (BuildContext context) => AdminCategoryUpdatePage(),
           'admin/product/list': (BuildContext context) => AdminProductListPage(),
+          'admin/product/create': (BuildContext context) => AdminProductCreatePage(),
+
 
 
         },
