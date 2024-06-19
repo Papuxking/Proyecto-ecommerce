@@ -16,6 +16,7 @@ class CategoriesService {
 
   Future<Resource<Category>> create(Category category, File file) async {
     try {
+      //ACTUALIZAR SIN IMAGEN
       // http://192.168.80.13:3000/users/5
       Uri url = Uri.http(ApiConfig.API_ECOMMERCE, '/categories'); 
       final request = http.MultipartRequest('POST', url);
