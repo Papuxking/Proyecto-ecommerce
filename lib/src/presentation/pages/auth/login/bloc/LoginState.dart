@@ -5,34 +5,30 @@ import 'package:ecommerce_flutter/src/presentation/utils/BlocFormItem.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-class LoginState extends Equatable{
-
-  final BlocForItem email;
-  final BlocForItem password;
+class LoginState extends Equatable {
+  final BlocFormItem email;
+  final BlocFormItem password;
   final Resource? response;
   final GlobalKey<FormState>? formKey;
 
-  const LoginState({
-    this.email = const BlocForItem(error: 'Ingresa el email'), 
-    this.password = const BlocForItem(error: 'Ingresa la contraseña'), 
-    this.formKey, 
-    this.response
-  });
+  const LoginState(
+      {this.email = const BlocFormItem(error: 'Ingresa el email'),
+      this.password = const BlocFormItem(error: 'Ingresa la contraseña'),
+      this.formKey,
+      this.response});
 
-  LoginState copyWith({
-    BlocForItem? email,
-    BlocForItem? password,
-    Resource? response,
-    GlobalKey<FormState>? formKey
-  }) {
+  LoginState copyWith(
+      {BlocFormItem? email,
+      BlocFormItem? password,
+      Resource? response,
+      GlobalKey<FormState>? formKey}) {
     return LoginState(
-      email: email ?? this.email,
-      password: password ?? this.password,
-      formKey: formKey,
-      response: response
-    );
+        email: email ?? this.email,
+        password: password ?? this.password,
+        formKey: formKey,
+        response: response);
   }
-  @override
-  List<Object?> get props => [email,password,response];
-}
 
+  @override
+  List<Object?> get props => [email, password, response];
+}

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 
-class Defaultbutton extends StatelessWidget {
+class DefaultButton extends StatelessWidget {
+
   String text;
   Function() onPressed;
   Color color;
+  Color? colorText;
 
-  Defaultbutton({
+  DefaultButton({
     required this.text,
     required this.onPressed,
-    this.color = Colors.black
+    this.color = Colors.black,
+    this.colorText = Colors.white,
   });
 
   @override
@@ -18,13 +21,16 @@ class Defaultbutton extends StatelessWidget {
       height: 55,
       child: ElevatedButton(
         onPressed: () {
-          onPressed();
-        },
+         onPressed();
+        }, 
         style: ElevatedButton.styleFrom(
-          backgroundColor: color),
+          backgroundColor: color
+        ),
         child: Text(
           text,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+            color: colorText
+          ),
         ),
       ),
     );

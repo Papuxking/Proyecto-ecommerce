@@ -1,14 +1,14 @@
 // src/presentation/utils/BlocFormItem.dart
 
-class BlocForItem{
+class BlocFormItem{
 
 final String value ;
 final String? error;
 
-const BlocForItem({this.value = '',this.error });
+const BlocFormItem({this.value = '',this.error });
 
-BlocForItem copyWith({ String? value ,String? error}) {
-  return BlocForItem(
+BlocFormItem copyWith({ String? value ,String? error}) {
+  return BlocFormItem(
     value: value ?? this.value,
     error: error ?? this.error 
   ); 
