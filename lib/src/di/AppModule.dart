@@ -1,8 +1,10 @@
 // src/di/AppModule.dart
 import 'package:ecommerce_flutter/src/data/dataSource/local/SharedPref.dart';
+import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AddressService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/CategoriesService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/ProductsService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/UsersService.dart';
+import 'package:ecommerce_flutter/src/data/repository/AddressRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/AuthRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:ecommerce_flutter/src/data/repository/CategoriesRepositoryImpl.dart';
@@ -10,6 +12,7 @@ import 'package:ecommerce_flutter/src/data/repository/ProductsRepositoryImpl.dar
 import 'package:ecommerce_flutter/src/data/repository/ShoppingBagRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/UsersRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/domain/models/AuthResponse.dart';
+import 'package:ecommerce_flutter/src/domain/repository/AddressRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/AuthRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/CategoriesRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/ProductsRepository.dart';
@@ -21,6 +24,13 @@ import 'package:ecommerce_flutter/src/domain/useCases/ShoppingBag/DeleteShopping
 import 'package:ecommerce_flutter/src/domain/useCases/ShoppingBag/GetProductsShoppingBagUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/ShoppingBag/GetTotalShoppingBagUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/ShoppingBag/ShoppingBagUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/AddressUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/CreateAddressUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/DeleteAddressFromSessionUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/DeleteAddressUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/GetAddressSessionUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/GetUserAddressUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/address/SaveAddressInSessionUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/GetUserSessionUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/LoginUseCase.dart';
@@ -65,8 +75,14 @@ abstract class AppModule{
   @injectable
   UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
 
- @injectable
+  @injectable
   CategoriesService get categoriesService => CategoriesService(token);
+
+  @injectable
+  AddressService get addressService => AddressService(token);
+
+  @injectable
+  AddressRepository get addressRepository => AddressRepositoryImpl(addressService, sharedPref);
 
   @injectable
   ProductsService get productsService => ProductsService(token);
@@ -100,7 +116,15 @@ abstract class AppModule{
   @injectable
   ShoppingBagRepository get shoppingBagRepository => ShoppingBagRepositoryImpl(sharedPref);
 
-
+  @injectable
+  AddressUseCases get addressUseCases => AddressUseCases(
+    create: CreateAddressUseCase(addressRepository),
+    getUserAddress: GetUserAddressUseCase(addressRepository),
+    saveAddressInSession: SaveAddressInSessionUseCase(addressRepository),
+    getAddressSession: GetAddressSessionUseCase(addressRepository),
+    delete: DeleteAddressUseCase(addressRepository),
+    deleteFromSession: DeleteAddressFromSessionUseCase(addressRepository)
+  );
 
   @injectable
   CategoriesUseCases get categoriesUseCases => CategoriesUseCases(
