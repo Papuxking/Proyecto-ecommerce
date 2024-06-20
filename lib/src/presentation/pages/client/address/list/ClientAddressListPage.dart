@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Clientaddresslistpage extends StatefulWidget {
-  const Clientaddresslistpage({super.key});
+class ClientAddressListPage extends StatefulWidget {
+  const ClientAddressListPage({super.key});
 
   @override
-  State<Clientaddresslistpage> createState() => _ClientaddresslistpageState();
+  State<ClientAddressListPage> createState() => _ClientAddressListPageState();
 }
 
-class _ClientaddresslistpageState extends State<Clientaddresslistpage> {
+class _ClientAddressListPageState extends State<ClientAddressListPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Text('Clientaddresslistpage')),
-    );
+    return Container();
   }
 }
