@@ -9,6 +9,7 @@ import 'package:ecommerce_flutter/src/presentation/pages/admin/product/list/Admi
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/update/AdminProductUpdatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/auth/register/RegisterPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/home/ClientHomePage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/product/list/ClientProductListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/profile/info/ProfileInfoPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/roles/RolesPage.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ const MyApp({super.key});
           'admin/product/list': (BuildContext context) => AdminProductListPage(),
           'admin/product/create': (BuildContext context) => AdminProductCreatePage(),
           'admin/product/update': (BuildContext context) => AdminProductUpdatePage(),
+          'client/product/list': (BuildContext context) => ClientProductListPage(),
 
 
 
