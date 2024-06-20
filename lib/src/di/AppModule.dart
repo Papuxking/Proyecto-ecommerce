@@ -93,7 +93,7 @@ abstract class AppModule{
   @injectable
   SharedPref get sharedPref => SharedPref();
 
-@injectable
+  @injectable
   CategoriesRepository get categoriesRepository => CategoriesRepositoryImpl(categoriesService);
 
   @injectable
@@ -115,6 +115,10 @@ abstract class AppModule{
 
   @injectable
   ShoppingBagRepository get shoppingBagRepository => ShoppingBagRepositoryImpl(sharedPref);
+
+  @injectable
+  AddressRepository get addressRepository => AddressRepositoryImpl(addressService, sharedPref);
+
 
   @injectable
   AddressUseCases get addressUseCases => AddressUseCases(
