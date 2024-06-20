@@ -23,7 +23,9 @@ class ClientAddressListItem extends StatelessWidget {
             value: index,
             groupValue: state.radioValue,
             onChanged: (value) {
-              bloc?.add(ChangeRadioValue(radioValue: value!, address: address));
+              if (value is int) {
+              bloc?.add(ChangeRadioValue(radioValue: value, address: address));
+            }
             },
           ),
           trailing: IconButton(

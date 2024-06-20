@@ -52,10 +52,12 @@ import 'package:ecommerce_flutter/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:injectable/injectable.dart';
 
 @module
-abstract class AppModule{
-//inyección de dependencias
+abstract class AppModule {
 
-@injectable
+  @injectable
+  SharedPref get sharedPref => SharedPref();
+
+  @injectable
   Future<String> get token async {
     String token = "";
     final userSession = await sharedPref.read('user');
@@ -73,31 +75,31 @@ abstract class AppModule{
   UsersService get usersService => UsersService(token);
 
   @injectable
-  UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
-
-  @injectable
   CategoriesService get categoriesService => CategoriesService(token);
-
-  @injectable
-  AddressService get addressService => AddressService(token);
-
-  @injectable
-  AddressRepository get addressRepository => AddressRepositoryImpl(addressService, sharedPref);
 
   @injectable
   ProductsService get productsService => ProductsService(token);
 
   @injectable
-  ProductsRepository get productsRepository => ProductsRepositoryImpl(productsService);
+  AddressService get addressService => AddressService(token);
 
   @injectable
-  SharedPref get sharedPref => SharedPref();
+  AuthRepository get authRepository => AuthRepositoryImpl(authService, sharedPref);
+
+  @injectable
+  UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
 
   @injectable
   CategoriesRepository get categoriesRepository => CategoriesRepositoryImpl(categoriesService);
 
   @injectable
-  AuthRepository get authRepository => AuthRepositoryImpl(authService, sharedPref);
+  ProductsRepository get productsRepository => ProductsRepositoryImpl(productsService);
+
+  @injectable
+  ShoppingBagRepository get shoppingBagRepository => ShoppingBagRepositoryImpl(sharedPref);
+
+  @injectable
+  AddressRepository get addressRepository => AddressRepositoryImpl(addressService, sharedPref);
 
   @injectable
   AuthUseCases get authUseCases => AuthUseCases(
@@ -114,22 +116,6 @@ abstract class AppModule{
   );
 
   @injectable
-  ShoppingBagRepository get shoppingBagRepository => ShoppingBagRepositoryImpl(sharedPref);
-
-  
-
-
-  @injectable
-  AddressUseCases get addressUseCases => AddressUseCases(
-    create: CreateAddressUseCase(addressRepository),
-    getUserAddress: GetUserAddressUseCase(addressRepository),
-    saveAddressInSession: SaveAddressInSessionUseCase(addressRepository),
-    getAddressSession: GetAddressSessionUseCase(addressRepository),
-    delete: DeleteAddressUseCase(addressRepository),
-    deleteFromSession: DeleteAddressFromSessionUseCase(addressRepository)
-  );
-
-  @injectable
   CategoriesUseCases get categoriesUseCases => CategoriesUseCases(
     create: CreateCategoryUseCase(categoriesRepository),
     getCategories: GetCategoriesUseCase(categoriesRepository),
@@ -137,7 +123,7 @@ abstract class AppModule{
     delete: DeleteCategoryUseCase(categoriesRepository)
   );
 
-  @injectable
+   @injectable
    ProductsUseCases get productsUseCases => ProductsUseCases(
     create: CreateProductUseCase(productsRepository),
     getProductsByCategory: GetProductsByCategoryUseCase(productsRepository),
@@ -153,6 +139,17 @@ abstract class AppModule{
     deleteShoppingBag: deleteShoppingBagUseCase(shoppingBagRepository),
     getTotal: GetTotalShoppingBagUseCase(shoppingBagRepository)
   );
+
+  @injectable
+  AddressUseCases get addressUseCases => AddressUseCases(
+    create: CreateAddressUseCase(addressRepository),
+    getUserAddress: GetUserAddressUseCase(addressRepository),
+    saveAddressInSession: SaveAddressInSessionUseCase(addressRepository),
+    getAddressSession: GetAddressSessionUseCase(addressRepository),
+    delete: DeleteAddressUseCase(addressRepository),
+    deleteFromSession: DeleteAddressFromSessionUseCase(addressRepository)
+  );
+
 
 
 }
