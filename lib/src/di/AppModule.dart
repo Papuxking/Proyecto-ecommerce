@@ -116,8 +116,7 @@ abstract class AppModule{
   @injectable
   ShoppingBagRepository get shoppingBagRepository => ShoppingBagRepositoryImpl(sharedPref);
 
-  @injectable
-  AddressRepository get addressRepository => AddressRepositoryImpl(addressService, sharedPref);
+  
 
 
   @injectable
@@ -154,5 +153,6 @@ abstract class AppModule{
     deleteShoppingBag: deleteShoppingBagUseCase(shoppingBagRepository),
     getTotal: GetTotalShoppingBagUseCase(shoppingBagRepository)
   );
+
 
 }
