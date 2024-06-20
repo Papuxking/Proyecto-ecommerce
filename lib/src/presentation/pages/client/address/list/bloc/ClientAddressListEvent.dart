@@ -15,7 +15,7 @@ class ChangeRadioValue extends ClientAddressListEvent {
   final int radioValue;
   final Address address;
 
-  ChangeRadioValue({required this.radioValue, required this.address});
+  const ChangeRadioValue({required this.radioValue, required this.address});
 
   @override
   // TODO: implement props
