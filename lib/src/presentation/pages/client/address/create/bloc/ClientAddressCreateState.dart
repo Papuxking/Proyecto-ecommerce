@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/src/domain/models/Address.dart';
 import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 import 'package:ecommerce_flutter/src/presentation/utils/BlocFormItem.dart';
 import 'package:equatable/equatable.dart';
@@ -19,7 +20,11 @@ class ClientAddressCreateState extends Equatable {
     this.idUser = 0
   });
 
-  
+  toAddress() => Address(
+    address: address.value, 
+    neighborhood: neighborhood.value, 
+    idUser: idUser
+  );
 
   ClientAddressCreateState copyWith({
     BlocFormItem? address,
