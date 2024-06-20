@@ -3,7 +3,7 @@ import 'package:ecommerce_flutter/src/presentation/pages/admin/category/list/Adm
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/bloc/AdminHomeBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/bloc/AdminHomeEvent.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/bloc/AdminHomeState.dart';
-import 'package:ecommerce_flutter/src/presentation/pages/admin/order/list/AdminOrderListPage.dart';
+//import 'package:ecommerce_flutter/src/presentation/pages/admin/order/list/AdminOrderListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/list/AdminProductListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/profile/info/ProfileInfoPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/roles/RolesPage.dart';
@@ -23,7 +23,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
 
   List<Widget> pageList = <Widget>[
     AdminCategoryListPage(),
-    AdminOrderListPage(),
+    //AdminOrderListPage(),
     RolesPage(),
     ProfileInfoPage()
   ];
