@@ -1,3 +1,4 @@
+import 'package:ecommerce_flutter/src/domain/models/MercadoPagoCardTokenBody.dart';
 import 'package:ecommerce_flutter/src/domain/models/MercadoPagoIdentificationType.dart';
 import 'package:ecommerce_flutter/src/domain/utils/Resource.dart';
 import 'package:equatable/equatable.dart';
@@ -30,6 +31,20 @@ class ClientPaymentFormState extends Equatable {
     this.response,
     this.totalToPay = 0
   });
+
+  MercadoPagoCardTokenBody toCardTokenBody() => MercadoPagoCardTokenBody(
+    cardNumber: cardNumber.replaceAll(RegExp(' '), ''), 
+    expirationYear: '20${expireDate.split('/')[1]}', // 2025
+    expirationMonth: int.parse(expireDate.split('/')[0]), // 11 
+    securityCode: cvvCode, 
+    cardholder: Cardholder(
+      name: cardHolderName, 
+      identification: Identification(
+        number: identificationNumber, 
+        type: identificationType ?? ''
+      )
+    )
+  );
 
   ClientPaymentFormState copyWith({
     String? cardNumber,

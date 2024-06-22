@@ -17,6 +17,7 @@ class ClientPaymentFormBloc extends Bloc<ClientPaymentFormEvent, ClientPaymentFo
     on<CreditCardChanged>(_onCreditCardChanged);
     on<IdentificationTypeChanged>(_onIdentificationTypeChanged);
     on<IdentificationNumberChanged>(_onIdentificationNumberChanged);
+    on<FormSubmit>(_onFormSubmit);
   }
 
   final formKey = GlobalKey<FormState>();
@@ -77,6 +78,19 @@ class ClientPaymentFormBloc extends Bloc<ClientPaymentFormEvent, ClientPaymentFo
     );
   }
 
-  
+  Future<void> _onFormSubmit(FormSubmit event, Emitter<ClientPaymentFormState> emit) async {
+    print('Form data ${ state.toCardTokenBody().toJson() }');
+    emit(
+      state.copyWith(
+        response: Loading()
+      )
+    );
+    Resource response = await mercadoPagoUseCases.createCardToken.run(state.toCardTokenBody());
+    emit(
+      state.copyWith(
+        response: response
+      )
+    );
+  }
 
 }
