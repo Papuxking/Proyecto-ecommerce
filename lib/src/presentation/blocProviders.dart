@@ -24,6 +24,8 @@ import 'package:ecommerce_flutter/src/presentation/pages/client/address/create/b
 import 'package:ecommerce_flutter/src/presentation/pages/client/address/list/bloc/ClientAddressListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/category/list/bloc/ClientCategoryListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/payment/form/bloc/ClientPaymentFormBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/payment/form/bloc/ClientPaymentFormEvent.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/product/detail/bloc/ClientProductDetailBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/product/list/bloc/ClientProductListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/profile/info/bloc/ProfileInfoBloc.dart';
@@ -53,7 +55,8 @@ List<BlocProvider> blocProviders = [
   BlocProvider<ClientShoppingBagBloc>(create: (context) => ClientShoppingBagBloc(locator<ShoppingBagUseCases>())),
   BlocProvider<ClientAddressCreateBloc>(create: (context) => ClientAddressCreateBloc(locator<AddressUseCases>(), locator<AuthUseCases>())..add(ClientAddressCreateInitEvent())),
   BlocProvider<ClientAddressListBloc>(create: (context) => ClientAddressListBloc(locator<AddressUseCases>(), locator<AuthUseCases>())),
-  
+  BlocProvider<ClientPaymentFormBloc>(create: (context) => ClientPaymentFormBloc(locator<MercadoPagoUseCases>(), locator<ShoppingBagUseCases>())..add(ClientPaymentFormInitEvent())),
+
 
 
 
