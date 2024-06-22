@@ -3,6 +3,7 @@ import 'package:ecommerce_flutter/src/data/dataSource/local/SharedPref.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AddressService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/CategoriesService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/MercadoPagoService.dart';
+import 'package:ecommerce_flutter/src/data/dataSource/remote/services/OrdersService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/ProductsService.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/UsersService.dart';
 import 'package:ecommerce_flutter/src/data/repository/AddressRepositoryImpl.dart';
@@ -10,6 +11,7 @@ import 'package:ecommerce_flutter/src/data/repository/AuthRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/dataSource/remote/services/AuthService.dart';
 import 'package:ecommerce_flutter/src/data/repository/CategoriesRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/MercadoPagoRepositoryImpl.dart';
+import 'package:ecommerce_flutter/src/data/repository/OrdersRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/ProductsRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/ShoppingBagRepositoryImpl.dart';
 import 'package:ecommerce_flutter/src/data/repository/UsersRepositoryImpl.dart';
@@ -18,6 +20,7 @@ import 'package:ecommerce_flutter/src/domain/repository/AddressRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/AuthRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/CategoriesRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/MercadoPagoRepository.dart';
+import 'package:ecommerce_flutter/src/domain/repository/OrdersRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/ProductsRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/ShoppingBagRepository.dart';
 import 'package:ecommerce_flutter/src/domain/repository/UsersRepository.dart';
@@ -50,6 +53,10 @@ import 'package:ecommerce_flutter/src/domain/useCases/categories/CreateCategoryU
 import 'package:ecommerce_flutter/src/domain/useCases/categories/DeleteCategoryUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/categories/GetCategoriesUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/categories/UpdateCategoryUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/orders/GetOrdersByClientUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/orders/GetOrdersUseCase.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/orders/OrdersUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/orders/UpdateStatusOrderUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/CreateProductUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/DeleteProductUseCase.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/GetProductsByCategoryUseCase.dart';
@@ -100,11 +107,17 @@ abstract class AppModule {
   @injectable
   AuthRepository get authRepository => AuthRepositoryImpl(authService, sharedPref);
 
+@injectable
+  OrdersService get ordersService => OrdersService(token);
+
   @injectable
   UsersRepository get usersRepository => UsersRepositoryImpl(usersService);
 
   @injectable
   CategoriesRepository get categoriesRepository => CategoriesRepositoryImpl(categoriesService);
+
+  @injectable
+  OrdersRepository get ordersRepository => OrdersRepositoryImpl(ordersService);
 
   @injectable
   ProductsRepository get productsRepository => ProductsRepositoryImpl(productsService);
@@ -172,6 +185,11 @@ abstract class AppModule {
     createPaymentUseCase: CreatePaymentUseCase(mercadoPagoRepository)
   );
 
-
+  @injectable
+  OrdersUseCases get ordersUseCases => OrdersUseCases(
+    getOrders: GetOrdersUseCase(ordersRepository),
+    getOrdersByClient: GetOrdersByClientUseCase(ordersRepository),
+    updateStatus: UpdateStatusOrderUseCase(ordersRepository)
+  );
 
 }
