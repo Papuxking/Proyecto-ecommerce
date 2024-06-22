@@ -53,7 +53,9 @@ class ClientPaymentFormContent extends StatelessWidget {
         value: state.identificationType,
         items: _dropDownItems(), 
         onChanged: (value) {
+            if (value is String) {
           bloc?.add(IdentificationTypeChanged(identificationType: value!));
+          }
         }
       ),
     );
