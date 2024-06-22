@@ -19,6 +19,8 @@ class MercadoPagoRepositoryImpl implements MercadoPagoRepository {
     return mercadoPagoService.getIdentificationTypes();
   }
 
+  
+
   @override
   Future<Resource<MercadoPagoCardTokenResponse>> createCardToken(MercadoPagoCardTokenBody mercadoPagoCardTokenBody) {
     return mercadoPagoService.createCardToken(mercadoPagoCardTokenBody);
