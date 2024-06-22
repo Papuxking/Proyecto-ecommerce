@@ -1,4 +1,5 @@
 import 'package:ecommerce_flutter/src/domain/models/MercadoPagoPaymentResponse.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/payment/status/ClientPaymentStatusContent.dart';
 import 'package:flutter/material.dart';
 
 class ClientPaymentStatusPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class _ClientPaymentStatusPageState extends State<ClientPaymentStatusPage> {
   Widget build(BuildContext context) {
     paymentResponse = ModalRoute.of(context)?.settings.arguments as MercadoPagoPaymentResponse;
     return Scaffold(
-      body: Center(child: Text("ClientPaymentStatusPage"),),
+      body: ClientPaymentStatusContent(paymentResponse),
     );
   }
 }

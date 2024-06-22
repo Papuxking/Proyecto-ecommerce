@@ -14,6 +14,7 @@ import 'package:ecommerce_flutter/src/presentation/pages/client/address/list/Cli
 import 'package:ecommerce_flutter/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/payment/form/ClientPaymentFormPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/payment/installments/ClientPaymentInstallmentsPage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/payment/status/ClientPaymentStatusPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/product/detail/ClientProductDetailPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/product/list/ClientProductListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/profile/info/ProfileInfoPage.dart';
@@ -66,6 +67,7 @@ const MyApp({super.key});
           'client/address/create': (BuildContext context) => ClientAddressCreatePage(),
           'client/payment/form': (BuildContext context) => ClientPaymentFormPage(),
           'client/payment/installments': (BuildContext context) => ClientPaymentInstallmentsPage(),
+          'client/payment/status': (BuildContext context) => ClientPaymentStatusPage(),          
 
 
         },
