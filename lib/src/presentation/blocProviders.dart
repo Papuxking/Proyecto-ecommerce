@@ -5,6 +5,7 @@ import 'package:ecommerce_flutter/src/domain/useCases/ShoppingBag/ShoppingBagUse
 import 'package:ecommerce_flutter/src/domain/useCases/address/AddressUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/auth/AuthUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/categories/CategoriesUseCases.dart';
+import 'package:ecommerce_flutter/src/domain/useCases/orders/OrdersUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/products/ProductsUseCases.dart';
 import 'package:ecommerce_flutter/src/domain/useCases/users/UsersUseCases.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/bloc/AdminCategoryCreateBloc.dart';
@@ -12,6 +13,8 @@ import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/b
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/list/bloc/AdminCategoryListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/update/bloc/AdminCategoryUpdateBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/bloc/AdminHomeBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/order/detail/bloc/AdminOrderDetailBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/order/list/bloc/AdminOrderListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/create/bloc/AdminProductCreateBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/list/bloc/AdminProductListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/update/bloc/AdminProductUpdateBloc.dart';
@@ -25,6 +28,7 @@ import 'package:ecommerce_flutter/src/presentation/pages/client/address/create/b
 import 'package:ecommerce_flutter/src/presentation/pages/client/address/list/bloc/ClientAddressListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/category/list/bloc/ClientCategoryListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/client/order/list/bloc/ClientOrderListBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/payment/form/bloc/ClientPaymentFormBloc.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/payment/form/bloc/ClientPaymentFormEvent.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/client/payment/installments/bloc/ClientPaymentInstallmentsBloc.dart';
@@ -66,7 +70,8 @@ List<BlocProvider> blocProviders = [
       locator<AddressUseCases>(),
     )
   ),
-
-
+  BlocProvider<AdminOrderListBloc>(create: (context) => AdminOrderListBloc(locator<OrdersUseCases>())),
+  BlocProvider<AdminOrderDetailBloc>(create: (context) => AdminOrderDetailBloc(locator<OrdersUseCases>())),
+  BlocProvider<ClientOrderListBloc>(create: (context) => ClientOrderListBloc(locator<OrdersUseCases>(), locator<AuthUseCases>())),
 
 ];

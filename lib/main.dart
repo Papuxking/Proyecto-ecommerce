@@ -4,6 +4,7 @@ import 'package:ecommerce_flutter/src/presentation/blocProviders.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/create/AdminCategoryCreatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/category/update/AdminCategoryUpdatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/home/AdminHomePage.dart';
+import 'package:ecommerce_flutter/src/presentation/pages/admin/order/detail/AdminOrderDetailPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/create/AdminProductCreatePage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/list/AdminProductListPage.dart';
 import 'package:ecommerce_flutter/src/presentation/pages/admin/product/update/AdminProductUpdatePage.dart';
@@ -68,6 +69,7 @@ const MyApp({super.key});
           'client/payment/form': (BuildContext context) => ClientPaymentFormPage(),
           'client/payment/installments': (BuildContext context) => ClientPaymentInstallmentsPage(),
           'client/payment/status': (BuildContext context) => ClientPaymentStatusPage(),          
+          'admin/order/detail': (BuildContext context) => AdminOrderDetailPage(),          
 
 
         },
